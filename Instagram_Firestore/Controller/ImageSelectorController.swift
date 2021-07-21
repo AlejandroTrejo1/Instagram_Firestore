@@ -9,9 +9,10 @@ import UIKit
 import YPImagePicker
 import Firebase
 
-class ImageSelectorController: UIViewController {
+class ImageSelectorController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
+        definesPresentationContext = true
         configure()
         view.backgroundColor = .white
     }
@@ -32,13 +33,19 @@ class ImageSelectorController: UIViewController {
     }
     
     //MARK: - Properties
-    
+        
     var user: User?
+    
+    var photoTaken: UIImage?
+    
+    var imagePicker = UIImagePickerController()
     
     // MARK: - Helpers
     
     func configure() {
         fetchCurrentUser()
+        imagePicker.delegate = self
+
         let alertController = UIAlertController(title: "Seleccionar Foto", message: "Elige una opción.", preferredStyle: .alert)
         
         // Create the actions
@@ -90,6 +97,20 @@ class ImageSelectorController: UIViewController {
         }
     }
     
+    func didTakePhoto(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true) {
+            print("Did Take Photo")
+            let controller = UploadPostController()
+            controller.selectedImage = self.photoTaken
+            controller.uploadDelegate = self
+            controller.currentUser = self.user
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: false, completion: nil)
+        }
+        
+    }
+    
     
     
     
@@ -104,8 +125,14 @@ class ImageSelectorController: UIViewController {
     
     // MARK: - Actions
     
-    func openCamera() {
-        print("DEBUG: Open Camera")
+    func openCamera()
+    {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        pickerController.mediaTypes = ["public.image"]
+        pickerController.sourceType = .camera
+        present(pickerController, animated: true)
     }
     
     func openLibrary() {
@@ -136,6 +163,21 @@ extension ImageSelectorController: UploadPostControllerDelegate {
         controller.dismiss(animated: true, completion: nil)
         hideController(handleRefresh: true)
         
+    }
+    
+    
+}
+
+extension ImageSelectorController: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            print("Photo taked.")
+            photoTaken = pickedImage
+            didTakePhoto(picker)
+        } else {
+            print("No se esta obteniendo foto")
+        }
+           
     }
     
     

@@ -264,7 +264,6 @@
 				5C2F3CBF0D7F6394DFA3198A /* Pods-Instagram_Firestore.debug.xcconfig */,
 				5F868ADA5230FA39E05C16A9 /* Pods-Instagram_Firestore.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
