@@ -19,6 +19,15 @@ struct UserService {
         }
     }
     
+    static func getCurrentUser(completion: @escaping(User) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        COLLECTION_USERS.document(uid).getDocument { snapshot, _ in
+            guard let dictionary = snapshot?.data() else { return }
+            let user = User(dictionary: dictionary)
+            completion(user)
+        }
+    }
+    
     static func fetchUsers(completion: @escaping([User]) -> Void) {
         var users = [User]()
         //Poniendo ruta, tomando documentos de esa ruta y almacenandolos en snapshot

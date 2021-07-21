@@ -27,6 +27,8 @@ class MainTabController: UITabBarController {
         super.viewDidLoad()
         checkIfUserIsLoggedIn()
         fetchUser()
+//        let controller = ImageSelectorController()
+//        controller.selectorDelegate = self
     }
     
     // MARK: - API
@@ -58,15 +60,13 @@ class MainTabController: UITabBarController {
     func configureViewControllers(withUser user: User) {
         view.backgroundColor = .white
         
-        self.delegate = self
-        
         let layout = UICollectionViewFlowLayout()
         
         let feed = templateNavigationViewContoller(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected"), rootViewController: FeedController(collectionViewLayout: layout))
         
         let search = templateNavigationViewContoller(unselectedImage: #imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected"), rootViewController: SearchController(caller: "search", post: nil))
         
-        let imageSelector = templateNavigationViewContoller(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_unselected"), rootViewController: ImageSelectorController())
+        let imageSelector = templateNavigationViewContoller(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_unselected"), rootViewController: ImageSelectorController(maintab: self))
         
         let notifications = templateNavigationViewContoller(unselectedImage: #imageLiteral(resourceName: "like_unselected"), selectedImage: #imageLiteral(resourceName: "like_selected"), rootViewController: NotificationsCotroller())
         
@@ -87,23 +87,6 @@ class MainTabController: UITabBarController {
         nav.navigationBar.tintColor = .black
         return nav
     }
-    
-    func didFinishedPickingMedia(_ picker: YPImagePicker) {
-        picker.didFinishPicking { items, _ in
-            picker.dismiss(animated: false) {
-                guard let selectedImage = items.singlePhoto?.image else { return }
-                //Presentar UploadPostController
-                let controller = UploadPostController()
-                controller.selectedImage = selectedImage
-                controller.uploadDelegate = self
-                controller.currentUser = self.user
-                let nav = UINavigationController(rootViewController: controller)
-                nav.modalPresentationStyle = .fullScreen
-                self.present(nav, animated: false, completion: nil)
-            }
-        }
-    }
-    
 }
 
 
@@ -119,45 +102,5 @@ extension MainTabController: AuthenticationDelegate {
     }
 }
 
+    
 
-// MARK - UITabBarControllerDelegate
-
-
-extension MainTabController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        let index = viewControllers?.firstIndex(of: viewController)
-        print("DEBUG: Index of view Controller is \(index)")
-        
-        if index == 2 {
-            var config = YPImagePickerConfiguration()
-            config.library.mediaType = .photo
-            config.shouldSaveNewPicturesToAlbum = false
-            config.startOnScreen = .library
-            config.screens = [.library]
-            config.hidesStatusBar = false
-            config.hidesBottomBar = false
-            config.library.maxNumberOfItems = 1
-            
-            let picker = YPImagePicker(configuration: config)
-            picker.modalPresentationStyle = .fullScreen
-            present(picker, animated: true, completion: nil)
-            
-            didFinishedPickingMedia(picker)
-        }
-        
-        return true
-    }
-}
-
-// MARK: - UploadPostControllerDelegate
-
-extension MainTabController: UploadPostControllerDelegate {
-    func controllerDidFinishedUploadingPost(_ controller: UploadPostController) {
-        selectedIndex = 0
-        controller.dismiss(animated: true, completion: nil)
-        
-        guard let feedNav = viewControllers?.first as? UINavigationController else { return }
-        guard let feed = feedNav.viewControllers.first as? FeedController else { return }
-        feed.handleRefresh()
-    }
-}

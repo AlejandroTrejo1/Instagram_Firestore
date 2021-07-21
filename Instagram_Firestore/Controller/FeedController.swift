@@ -37,6 +37,8 @@ class FeedController: UICollectionViewController {
             checkIfUserLikedPosts()
         }
         
+        
+        
     }
     
     // MARK: - Helpers
@@ -48,8 +50,8 @@ class FeedController: UICollectionViewController {
         
         if post == nil {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cerrar Sesión",
-                                                                style: .plain, target: self,
-                                                                action: #selector(handleLogout))
+                                                               style: .plain, target: self,
+                                                               action: #selector(handleLogout))
         }
         
         navigationItem.title = "Inicio"
@@ -57,6 +59,8 @@ class FeedController: UICollectionViewController {
         let refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refresher
+        
+        
     }
     
     // MARK: - API
@@ -111,7 +115,7 @@ class FeedController: UICollectionViewController {
 
 
 
-    // MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 
 extension FeedController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
