@@ -9,7 +9,7 @@ import UIKit
 import YPImagePicker
 import Firebase
 
-class ImageSelectorController: UIViewController, UINavigationControllerDelegate {
+class ImageSelectorController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         definesPresentationContext = true
@@ -35,16 +35,13 @@ class ImageSelectorController: UIViewController, UINavigationControllerDelegate 
     //MARK: - Properties
         
     var user: User?
-    
-    var photoTaken: UIImage?
-    
+        
     var imagePicker = UIImagePickerController()
     
     // MARK: - Helpers
     
     func configure() {
         fetchCurrentUser()
-        imagePicker.delegate = self
 
         let alertController = UIAlertController(title: "Seleccionar Foto", message: "Elige una opción.", preferredStyle: .alert)
         
@@ -97,20 +94,6 @@ class ImageSelectorController: UIViewController, UINavigationControllerDelegate 
         }
     }
     
-    func didTakePhoto(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true) {
-            print("Did Take Photo")
-            let controller = UploadPostController()
-            controller.selectedImage = self.photoTaken
-            controller.uploadDelegate = self
-            controller.currentUser = self.user
-            let nav = UINavigationController(rootViewController: controller)
-            nav.modalPresentationStyle = .fullScreen
-            self.present(nav, animated: false, completion: nil)
-        }
-        
-    }
-    
     
     
     
@@ -127,12 +110,19 @@ class ImageSelectorController: UIViewController, UINavigationControllerDelegate 
     
     func openCamera()
     {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.allowsEditing = true
-        pickerController.mediaTypes = ["public.image"]
-        pickerController.sourceType = .camera
-        present(pickerController, animated: true)
+        var config = YPImagePickerConfiguration()
+        config.shouldSaveNewPicturesToAlbum = true
+        config.wordings.cameraTitle = "Foto"
+        config.wordings.cancel = "Cancelar"
+        config.wordings.next = "Seleccionar"
+        config.wordings.filter = "Filtros"
+        config.wordings.libraryTitle = "Libreria"
+        let picker = YPImagePicker(configuration: config)
+        picker.dismiss(animated: true) {
+            self.hideController(handleRefresh: false)
+        }
+        present(picker, animated: true, completion: nil)
+        didFinishedPickingMedia(picker)
     }
     
     func openLibrary() {
@@ -144,6 +134,10 @@ class ImageSelectorController: UIViewController, UINavigationControllerDelegate 
         config.screens = [.library]
         config.hidesStatusBar = false
         config.hidesBottomBar = false
+        config.wordings.cancel = "Cancelar"
+        config.wordings.next = "Seleccionar"
+        config.wordings.filter = "Filtros"
+        config.wordings.libraryTitle = "Libreria"
         config.library.maxNumberOfItems = 1
         
         let picker = YPImagePicker(configuration: config)
@@ -168,17 +162,3 @@ extension ImageSelectorController: UploadPostControllerDelegate {
     
 }
 
-extension ImageSelectorController: UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            print("Photo taked.")
-            photoTaken = pickedImage
-            didTakePhoto(picker)
-        } else {
-            print("No se esta obteniendo foto")
-        }
-           
-    }
-    
-    
-}
