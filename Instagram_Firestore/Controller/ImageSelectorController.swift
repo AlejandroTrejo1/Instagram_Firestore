@@ -8,6 +8,7 @@
 import UIKit
 import YPImagePicker
 import Firebase
+import PhotosUI
 
 class ImageSelectorController: UIViewController {
     override func viewDidLoad() {
@@ -34,6 +35,8 @@ class ImageSelectorController: UIViewController {
     //MARK: - Properties
     
     var user: User?
+    
+    var imagePicked: UIImage?
     
     // MARK: - Helpers
     
@@ -74,21 +77,21 @@ class ImageSelectorController: UIViewController {
         }
     }
     
-    func didFinishedPickingMedia(_ picker: YPImagePicker) {
-        picker.didFinishPicking { items, _ in
-            picker.dismiss(animated: false) {
-                guard let selectedImage = items.singlePhoto?.image else { return }
-                //Presentar UploadPostController
-                let controller = UploadPostController()
-                controller.selectedImage = selectedImage
-                controller.uploadDelegate = self
-                controller.currentUser = self.user
-                let nav = UINavigationController(rootViewController: controller)
-                nav.modalPresentationStyle = .fullScreen
-                self.present(nav, animated: false, completion: nil)
-            }
-        }
+    func didFinishedPickingMedia() {
+        
+        //Presentar UploadPostController
+        let controller = UploadPostController()
+        controller.selectedImage = imagePicked
+        controller.uploadDelegate = self
+        controller.currentUser = self.user
+        
+        
+        
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: false, completion: nil)
     }
+    
     
     
     
@@ -110,21 +113,21 @@ class ImageSelectorController: UIViewController {
     
     func openLibrary() {
         print("DEBUG: Open library")
-        var config = YPImagePickerConfiguration()
-        config.library.mediaType = .photo
-        config.shouldSaveNewPicturesToAlbum = false
-        config.startOnScreen = .library
-        config.screens = [.library]
-        config.hidesStatusBar = false
-        config.hidesBottomBar = false
-        config.library.maxNumberOfItems = 1
+
+        var config = PHPickerConfiguration()
+        config.filter = .images
         
-        let picker = YPImagePicker(configuration: config)
-        picker.modalPresentationStyle = .fullScreen
-        present(picker, animated: true, completion: nil)
         
-        didFinishedPickingMedia(picker)
+        let picker = PHPickerViewController(configuration: config)
+        picker.dismiss(animated: true) {
+            print("Dismissed")
+            self.hideController(handleRefresh: false)
+        }
+        picker.delegate = self
+        present(picker, animated: true)
+        
     }
+    
     
 }
 
@@ -136,4 +139,21 @@ extension ImageSelectorController: UploadPostControllerDelegate {
     }
     
     
+}
+
+extension ImageSelectorController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        dismiss(animated: true)
+        if let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                DispatchQueue.main.async {
+                    guard let self = self, let image = image as? UIImage else { return }
+                    self.imagePicked = image
+                    self.didFinishedPickingMedia()
+                    
+                }
+            }
+        }
+        
+    }
 }
