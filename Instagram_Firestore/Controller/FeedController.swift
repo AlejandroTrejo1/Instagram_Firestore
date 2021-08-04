@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
 
 private let reuseIdentifier = "Cell"
 
@@ -99,8 +100,15 @@ class FeedController: UICollectionViewController {
     
     @objc func handleLogout() {
         do {
+
+            if let token = AccessToken.current {
+                if !token.isExpired {
+                    LoginManager().logOut()
+                }
+            }
+            
             try Auth.auth().signOut()
-            let controller = LoginController()
+            let controller = SignInController()
             controller.authDelegate = self.tabBarController as? MainTabController
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
@@ -190,5 +198,17 @@ extension FeedController: FeedCellDelegate {
         navigationController?.pushViewController(controller, animated: true)
         
     }
+    
+}
+
+extension FeedController: LoginButtonDelegate {
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        print("Button log in")
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        
+    }
+    
     
 }

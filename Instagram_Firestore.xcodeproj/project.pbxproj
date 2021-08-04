@@ -36,9 +36,11 @@
 		0138674D26952793006FB549 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0138674C26952793006FB549 /* NotificationCell.swift */; };
 		0138674F26952F5E006FB549 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0138674E26952F5E006FB549 /* Notification.swift */; };
 		0138675126955668006FB549 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0138675026955668006FB549 /* NotificationService.swift */; };
+		0154FC2D26A92D7700B6886E /* GIDSingIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154FC2C26A92D7700B6886E /* GIDSingIn.swift */; };
+		0154FC2F26AA781E00B6886E /* SignInEmailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154FC2E26AA781E00B6886E /* SignInEmailController.swift */; };
 		015B835D2687C881002026DD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015B835C2687C881002026DD /* Post.swift */; };
 		015B835F2688FC0C002026DD /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015B835E2688FC0C002026DD /* PostViewModel.swift */; };
-		0190D30C266EF8AE0099B060 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0190D30B266EF8AE0099B060 /* LoginController.swift */; };
+		0190D30C266EF8AE0099B060 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0190D30B266EF8AE0099B060 /* SignInController.swift */; };
 		0190D30E266EF8BB0099B060 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0190D30D266EF8BB0099B060 /* RegistrationController.swift */; };
 		0190D310266F14510099B060 /* CustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0190D30F266F14510099B060 /* CustomTextfield.swift */; };
 		019D9864268BF51B00CB0F38 /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019D9863268BF51B00CB0F38 /* CommentController.swift */; };
@@ -46,6 +48,8 @@
 		019D9868268C20C800CB0F38 /* CommentInputAccesoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019D9867268C20C800CB0F38 /* CommentInputAccesoryView.swift */; };
 		019D986A268D450300CB0F38 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019D9869268D450300CB0F38 /* CommentService.swift */; };
 		019D986C268D652000CB0F38 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019D986B268D652000CB0F38 /* Comment.swift */; };
+		01B8E85326B0E2FB003EC500 /* GenerateNonce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B8E85226B0E2FB003EC500 /* GenerateNonce.swift */; };
+		01BA498226B272E600842092 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BA498126B272E600842092 /* SignUpController.swift */; };
 		01E93FF32670519A00AA02D2 /* SignCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E93FF22670519A00AA02D2 /* SignCustomButton.swift */; };
 		01E93FF52670562C00AA02D2 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E93FF42670562C00AA02D2 /* AuthenticationViewModel.swift */; };
 		01E93FF726718B2100AA02D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01E93FF626718B2100AA02D2 /* GoogleService-Info.plist */; };
@@ -88,9 +92,11 @@
 		0138674C26952793006FB549 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		0138674E26952F5E006FB549 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		0138675026955668006FB549 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		0154FC2C26A92D7700B6886E /* GIDSingIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIDSingIn.swift; sourceTree = "<group>"; };
+		0154FC2E26AA781E00B6886E /* SignInEmailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailController.swift; sourceTree = "<group>"; };
 		015B835C2687C881002026DD /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		015B835E2688FC0C002026DD /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
-		0190D30B266EF8AE0099B060 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		0190D30B266EF8AE0099B060 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		0190D30D266EF8BB0099B060 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		0190D30F266F14510099B060 /* CustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfield.swift; sourceTree = "<group>"; };
 		019D9863268BF51B00CB0F38 /* CommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentController.swift; sourceTree = "<group>"; };
@@ -98,6 +104,9 @@
 		019D9867268C20C800CB0F38 /* CommentInputAccesoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputAccesoryView.swift; sourceTree = "<group>"; };
 		019D9869268D450300CB0F38 /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		019D986B268D652000CB0F38 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		01B8E85126B0D476003EC500 /* Instagram_Firestore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Instagram_Firestore.entitlements; sourceTree = "<group>"; };
+		01B8E85226B0E2FB003EC500 /* GenerateNonce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateNonce.swift; sourceTree = "<group>"; };
+		01BA498126B272E600842092 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		01E93FF22670519A00AA02D2 /* SignCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignCustomButton.swift; sourceTree = "<group>"; };
 		01E93FF42670562C00AA02D2 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		01E93FF626718B2100AA02D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -152,6 +161,7 @@
 		012E0522266BF9E700DE6E4D /* Instagram_Firestore */ = {
 			isa = PBXGroup;
 			children = (
+				01B8E85126B0D476003EC500 /* Instagram_Firestore.entitlements */,
 				012E053F266BFA5200DE6E4D /* Model */,
 				012E053E266BFA4F00DE6E4D /* View */,
 				012E053D266BFA4C00DE6E4D /* ViewModel */,
@@ -176,6 +186,7 @@
 				012E054E266D5DBE00DE6E4D /* Extensions.swift */,
 				011BB7CC2679A62700A66131 /* Constants.swift */,
 				01F19DA42684334A00B2C88F /* InputTextView.swift */,
+				01B8E85226B0E2FB003EC500 /* GenerateNonce.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -189,6 +200,7 @@
 				01F19DA626857D8600B2C88F /* PostService.swift */,
 				019D9869268D450300CB0F38 /* CommentService.swift */,
 				0138675026955668006FB549 /* NotificationService.swift */,
+				0154FC2C26A92D7700B6886E /* GIDSingIn.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -251,9 +263,11 @@
 		0190D30A266EF69E0099B060 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				0190D30B266EF8AE0099B060 /* LoginController.swift */,
+				0190D30B266EF8AE0099B060 /* SignInController.swift */,
+				0154FC2E26AA781E00B6886E /* SignInEmailController.swift */,
 				0190D30D266EF8BB0099B060 /* RegistrationController.swift */,
 				01F04298269E899E0023430A /* ResetPasswordController.swift */,
+				01BA498126B272E600842092 /* SignUpController.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -396,11 +410,13 @@
 				012E0528266BF9E700DE6E4D /* ViewController.swift in Sources */,
 				011BB7C226782D2B00A66131 /* ImageUploader.swift in Sources */,
 				011BB7C426782D3E00A66131 /* AuthService.swift in Sources */,
+				01B8E85326B0E2FB003EC500 /* GenerateNonce.swift in Sources */,
+				0154FC2F26AA781E00B6886E /* SignInEmailController.swift in Sources */,
 				011BB7D12679AEC400A66131 /* ProfileHeaderViewModel.swift in Sources */,
 				019D986C268D652000CB0F38 /* Comment.swift in Sources */,
 				01F04299269E899E0023430A /* ResetPasswordController.swift in Sources */,
 				010360E92697BDCA00D4FDC4 /* NotificationViewModel.swift in Sources */,
-				0190D30C266EF8AE0099B060 /* LoginController.swift in Sources */,
+				0190D30C266EF8AE0099B060 /* SignInController.swift in Sources */,
 				01F19DA326842BE300B2C88F /* UploadPostController.swift in Sources */,
 				019D9864268BF51B00CB0F38 /* CommentController.swift in Sources */,
 				012E054D266D5CB600DE6E4D /* FeedCell.swift in Sources */,
@@ -414,6 +430,7 @@
 				012E0545266D45D300DE6E4D /* SearchController.swift in Sources */,
 				0138674F26952F5E006FB549 /* Notification.swift in Sources */,
 				012E0524266BF9E700DE6E4D /* AppDelegate.swift in Sources */,
+				0154FC2D26A92D7700B6886E /* GIDSingIn.swift in Sources */,
 				01F19DA52684334A00B2C88F /* InputTextView.swift in Sources */,
 				011BB7D3267AFDB900A66131 /* UserCell.swift in Sources */,
 				012E0543266D45C400DE6E4D /* FeedController.swift in Sources */,
@@ -422,6 +439,7 @@
 				0138674D26952793006FB549 /* NotificationCell.swift in Sources */,
 				0138675126955668006FB549 /* NotificationService.swift in Sources */,
 				012E054B266D461B00DE6E4D /* ProfileController.swift in Sources */,
+				01BA498226B272E600842092 /* SignUpController.swift in Sources */,
 				012E0541266BFAFC00DE6E4D /* MainTabController.swift in Sources */,
 				01F19DA726857D8600B2C88F /* PostService.swift in Sources */,
 				011BB7CB2679A5D200A66131 /* UserService.swift in Sources */,
@@ -579,15 +597,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Instagram_Firestore/Instagram_Firestore.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5UPPZ9T836;
+				DEVELOPMENT_TEAM = 39T39WW543;
 				INFOPLIST_FILE = Instagram_Firestore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "alejandro.Instagram-Firestore";
+				PRODUCT_BUNDLE_IDENTIFIER = alejandro.InstagramFirestoreTutorial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -600,15 +619,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Instagram_Firestore/Instagram_Firestore.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5UPPZ9T836;
+				DEVELOPMENT_TEAM = 39T39WW543;
 				INFOPLIST_FILE = Instagram_Firestore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "alejandro.Instagram-Firestore";
+				PRODUCT_BUNDLE_IDENTIFIER = alejandro.InstagramFirestoreTutorial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

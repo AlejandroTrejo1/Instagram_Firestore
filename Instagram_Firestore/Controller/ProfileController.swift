@@ -35,6 +35,8 @@ class ProfileController: UICollectionViewController {
         checkIfUserIsFollowed()
         fetchUserStats()
         fetchPosts()
+        
+        print("Info User: \(user.fullname)")
     }
     
     // MARK: -API

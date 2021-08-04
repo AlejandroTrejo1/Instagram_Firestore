@@ -7,6 +7,9 @@
 
 import UIKit
 import JGProgressHUD
+import FirebaseAuth
+import Firebase
+import GoogleSignIn
 
 extension UIViewController {
     static let hud = JGProgressHUD(style: .dark)
@@ -34,7 +37,7 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "Entendido", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-
+    
 }
 
 extension UIButton {

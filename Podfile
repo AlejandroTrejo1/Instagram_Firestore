@@ -10,12 +10,15 @@ target 'Instagram_Firestore' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Database'
 	pod 'Firebase/Firestore'
+	pod 'Firebase/Analytics'
 	pod 'Firebase/Storage'
 	pod 'Firebase/Messaging'
 	pod 'Firebase/Auth'
+	pod 'GoogleSignIn'
 	pod 'ActiveLabel'
 	pod 'SDWebImage' , '~>4.4.2'
 	pod 'YPImagePicker'
 	pod 'JGProgressHUD'
+	pod 'FBSDKLoginKit'
 
 end

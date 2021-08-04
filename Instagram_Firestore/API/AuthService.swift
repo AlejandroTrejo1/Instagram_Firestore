@@ -6,7 +6,12 @@
 //
 
 import UIKit
+import FirebaseAuth
 import Firebase
+import GoogleSignIn
+import FBSDKLoginKit
+import FirebaseAuth
+import FirebaseMessaging
 
 
 struct AuthCredentials {
@@ -21,6 +26,58 @@ struct AuthService {
     
     static func logUserIn(withEmail email: String, password: String, completion: AuthDataResultCallback?) {
         Auth.auth().signIn(withEmail: email, password: password, completion: completion)
+    }
+    
+    static func signInWithThirdProvider(withCredential credential: AuthCredential, completion: @escaping(Error?, Bool) -> Void) {
+        
+        
+        Auth.auth().signIn(with: credential) { result, error in
+            if let error = error {
+                print("Error Registrando con google \(error.localizedDescription)")
+                return
+            }
+            
+            guard let isNewUser = result?.additionalUserInfo?.isNewUser else { return }
+            print("es nuevo usuario: \(isNewUser)")
+            completion(error, isNewUser)
+        }
+        
+    }
+    
+    
+    static func registerWithoutEmail(completion: @escaping(Error?) -> Void) {
+        guard let currentUser = Auth.auth().currentUser else { return }
+        print("Register without email")
+        
+        if currentUser.photoURL == nil {
+            print("usuario sin imagen")
+            let image: UIImage
+            image = UIImage(named: "profile_selected")!
+            ImageUploader.uploadImage(image: image) { imageUrl in
+                let data: [String: Any] = ["email": currentUser.email as Any,
+                                           "fullname": currentUser.displayName as Any,
+                                           "profileImageUrl": imageUrl as Any,
+                                           "uid": currentUser.uid,
+                                           "username": currentUser.email as Any]
+                
+                COLLECTION_USERS.document(currentUser.uid).setData(data, completion: completion)
+            }
+        } else {
+            guard let imageUrl = currentUser.photoURL else { return }
+            ImageUploader.downloadImage(from: imageUrl) { data in
+                if let image = UIImage(data: data) ?? UIImage(named: "profile_selected") {
+                    ImageUploader.uploadImage(image: image) { imageUrl in
+                        let data: [String: Any] = ["email": currentUser.email as Any,
+                                                   "fullname": currentUser.displayName as Any,
+                                                   "profileImageUrl": imageUrl as Any,
+                                                   "uid": currentUser.uid,
+                                                   "username": currentUser.email as Any]
+                        COLLECTION_USERS.document(currentUser.uid).setData(data, completion: completion)
+                    }
+                }
+            }
+        }
+        
     }
     
     static func registerUsers(withCredentials credentials: AuthCredentials, completion: @escaping(Error?) -> Void) {
@@ -47,8 +104,13 @@ struct AuthService {
         }
     }
     
+    //
+    
+    
+    
     static func resetPassword(with email: String, completion: SendPasswordResetCallback?) {
         Auth.auth().sendPasswordReset(withEmail: email, completion: completion)
     }
+    
     
 }

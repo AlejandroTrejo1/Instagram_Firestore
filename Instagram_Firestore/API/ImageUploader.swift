@@ -25,6 +25,23 @@ struct ImageUploader {
             }
         }
     }
+    
+    static func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    static func downloadImage(from url: URL, completion: @escaping(Data) -> Void) {
+        print("Download Started")
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            // always update the UI from the main thread
+            print(data.base64EncodedData())
+            completion(data)
+        }
+    }
+    
 }
 
 

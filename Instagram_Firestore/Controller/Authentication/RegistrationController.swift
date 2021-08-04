@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 class RegistrationController: UIViewController {
     // MARK: - Properties
@@ -65,7 +66,8 @@ class RegistrationController: UIViewController {
     
     // MARK: -Actions
     @objc func handleShowLogIn(){
-        navigationController?.popViewController(animated: true)
+        let controller = SignInController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func textDidChange(sender: UITextField) {
@@ -107,6 +109,7 @@ class RegistrationController: UIViewController {
             }
             
             self.authDelegate?.authenticationDidComplete()
+            
             
         }
     }

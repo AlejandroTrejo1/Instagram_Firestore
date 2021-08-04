@@ -26,6 +26,15 @@ class MainTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         checkIfUserIsLoggedIn()
+        
+//        let firebaseAuth = Auth.auth()
+//    do {
+//      try firebaseAuth.signOut()
+//    } catch let signOutError as NSError {
+//      print("Error signing out: %@", signOutError)
+//    }
+      
+        
         fetchUser()
 //        let controller = ImageSelectorController()
 //        controller.selectorDelegate = self
@@ -44,7 +53,7 @@ class MainTabController: UITabBarController {
     func checkIfUserIsLoggedIn() {
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
-                let controller = LoginController()
+                let controller = SignInController()
                 //Le decimos a LoginController que su delegado sera este Controlador
                 controller.authDelegate = self
                 let nav = UINavigationController(rootViewController: controller)

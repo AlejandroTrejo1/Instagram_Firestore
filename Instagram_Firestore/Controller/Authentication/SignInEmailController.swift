@@ -1,19 +1,16 @@
 //
-//  LoginController.swift
-//  InstagramFirestoreTutorial
+//  LoginEmailController.swift
+//  Instagram_Firestore
 //
-//  Created by Alejandro Trejo on 07/06/21.
+//  Created by Alejandro Trejo on 22/07/21.
 //
 
 import UIKit
 
-//Establecemos el protocolo en el Delegador
-protocol AuthenticationDelegate: AnyObject {
-    //lista de comandos para el delegado
-    func authenticationDidComplete()
-}
 
-class LoginController: UIViewController {
+
+
+class SignInEmailController: UIViewController {
     // MARK: - Properties
     
     private var viewModel = LoginViewModel()
@@ -104,8 +101,10 @@ class LoginController: UIViewController {
                 print("DEBUG: No se pudo iniciar sesión \(error.localizedDescription)")
                 return
             }
+            
+            self.showLoader(true)
             //Establecemos cuando se activara nuestro delegado
-            self.authDelegate?.authenticationDidComplete()  
+            self.authDelegate?.authenticationDidComplete()
         }
     }
     
@@ -146,8 +145,7 @@ class LoginController: UIViewController {
 }
 
 // MARK: -FormViewModel
-
-extension LoginController: FormViewModel {
+extension SignInEmailController: FormViewModel {
     func updateForm() {
         logginButton.backgroundColor = viewModel.buttonBackgroundColor
         logginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
@@ -156,11 +154,9 @@ extension LoginController: FormViewModel {
 }
 
 // MARK: - ResetPasswordControllerDelegate
-
-extension LoginController: ResetPasswordControllerDelegate {
+extension SignInEmailController: ResetPasswordControllerDelegate {
     func controllerDidSendResetPasswordLink(_ controller: ResetPasswordController) {
         navigationController?.popViewController(animated: true)
         showMessage(withTitle: "Exitoso", message: "Se ha enviado un correo a tu email.")
     }
 }
-
